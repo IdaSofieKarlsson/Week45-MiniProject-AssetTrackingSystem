@@ -25,6 +25,36 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
 
         public string Office { get; set; }
 
+        // Business rule: all company assets have a lifespan of 3 years
+        public const int LifespanYears = 3;
+
+        // Calculated property: no value is stored, it is worked out
+        // from PurchaseDate every time it is read.
+        public DateTime EndOfLifeDate => PurchaseDate.AddYears(LifespanYears);
+
+        // Works out the asset's status compared to a given date (usually today).
+        // Taking "today" as a parameter makes the method easy to test later.
+        public LifecycleStatus GetStatus(DateTime today)
+        {
+            // The date from which the asset counts as RED / YELLOW
+            DateTime redFrom = EndOfLifeDate.AddMonths(-3);
+            DateTime yellowFrom = EndOfLifeDate.AddMonths(-6);
+
+            // Check RED first: an asset with less than 3 months left
+            // also has less than 6 months left, so the order matters.
+            if (today >= redFrom)
+            {
+                return LifecycleStatus.Red;
+            }
+
+            if (today >= yellowFrom)
+            {
+                return LifecycleStatus.Yellow;
+            }
+
+            return LifecycleStatus.Ok;
+        }
+
         // Constructor: runs when a new Asset object is created with "new".
         // "protected" means only subclasses (Computer, MobilePhone) can call it.
         protected Asset(
@@ -48,3 +78,5 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
         }
     }
 }
+
+
