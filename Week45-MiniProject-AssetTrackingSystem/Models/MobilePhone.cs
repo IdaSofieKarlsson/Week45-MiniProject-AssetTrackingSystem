@@ -8,15 +8,13 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
     public class MobilePhone : Asset
     {
         public MobilePhone(
-        string brand,
-        string model,
-        DateTime purchaseDate,
-        decimal priceEur,
-        decimal localPrice,
-        string localCurrency,
-        string office)
-        // The asset type is fixed to "Phone" for every MobilePhone.
-        : base("Phone", brand, model, purchaseDate, priceEur, localPrice, localCurrency, office)
+            string brand,
+            string model,
+            DateTime purchaseDate,
+            decimal priceEur,
+            Office office)
+            // The asset type is fixed to "Phone" for every MobilePhone.
+            : base("Phone", brand, model, purchaseDate, priceEur, office)
         {
         }
     }

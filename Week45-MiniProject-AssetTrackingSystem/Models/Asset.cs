@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Week45_MiniProject_AssetTrackingSystem.Services;
 
 namespace Week45_MiniProject_AssetTrackingSystem.Models
 {
@@ -15,21 +16,22 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
         public string Model { get; set; }
         public DateTime PurchaseDate { get; set; }
 
-        // Price in the company's base currency (EUR)
+        // Purchase price in the company's base currency (EUR)
         public decimal PriceEur { get; set; }
 
-        // Price in the office's local currency.
-        // Hardcoded for now - currency conversion via API comes in Level 3.
-        public decimal LocalPrice { get; set; }
-        public string LocalCurrency { get; set; }
+        // Which office the asset belongs to
+        public Office Office { get; set; }
 
-        public string Office { get; set; }
+        // Calculated properties: nothing is stored, the values are worked out
+        // every time they are read. If the asset moves to another office,
+        // currency and local price update automatically.
+        public Currency LocalCurrency => CurrencyConverter.GetCurrencyForOffice(Office);
+        public decimal LocalPrice => CurrencyConverter.ConvertFromEur(PriceEur, LocalCurrency);
 
         // Business rule: all company assets have a lifespan of 3 years
         public const int LifespanYears = 3;
 
-        // Calculated property: no value is stored, it is worked out
-        // from PurchaseDate every time it is read.
+        // Calculated property: purchase date + 3 years
         public DateTime EndOfLifeDate => PurchaseDate.AddYears(LifespanYears);
 
         // Works out the asset's status compared to a given date (usually today).
@@ -57,23 +59,20 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
 
         // Constructor: runs when a new Asset object is created with "new".
         // "protected" means only subclasses (Computer, MobilePhone) can call it.
+        // Local price and currency are no longer passed in - they are calculated.
         protected Asset(
             string assetType,
             string brand,
             string model,
             DateTime purchaseDate,
             decimal priceEur,
-            decimal localPrice,
-            string localCurrency,
-            string office)
+            Office office)
         {
             AssetType = assetType;
             Brand = brand;
             Model = model;
             PurchaseDate = purchaseDate;
             PriceEur = priceEur;
-            LocalPrice = localPrice;
-            LocalCurrency = localCurrency;
             Office = office;
         }
     }
