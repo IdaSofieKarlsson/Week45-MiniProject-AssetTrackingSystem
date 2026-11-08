@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-// System.Net.Http.Json gives us GetFromJsonAsync (HttpClient + JSON in one step).
-// System.Text.Json gives us JsonException (thrown if the JSON is broken).
 using System.Net.Http.Json;
 using System.Text.Json;
 using Week45_MiniProject_AssetTrackingSystem.Models;
+
+// System.Net.Http.Json gives us GetFromJsonAsync (HttpClient + JSON in one step).
+// System.Text.Json gives us JsonException (thrown if the JSON is broken).
 
 namespace Week45_MiniProject_AssetTrackingSystem.Services
 {

@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Week45_MiniProject_AssetTrackingSystem.Models
 // An enum is a fixed set of named values.
-// Using it instead of plain strings ("RED", "YELLOW") means the compiler
-// catches typos, and we can only ever have one of these three values.
+// Using it instead of plain strings ("RED", "YELLOW") means the compiler catches typos, and we can only ever have one of these three values.
 {
     public enum LifecycleStatus
     {

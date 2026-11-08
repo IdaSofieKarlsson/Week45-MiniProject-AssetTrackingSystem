@@ -4,9 +4,6 @@ using System.Text;
 
 namespace Week45_MiniProject_AssetTrackingSystem.Services
 {
-    // ------------------------------------------------------------------
-    // WHAT IS THIS CLASS?
-    // ------------------------------------------------------------------
     // This class describes the SHAPE of the JSON that the Frankfurter API
     // sends back. It is a so-called DTO ("Data Transfer Object"): a class
     // that only holds data and has no logic.

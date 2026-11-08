@@ -4,17 +4,19 @@ using System.Text;
 
 namespace Week45_MiniProject_AssetTrackingSystem.Models
 {
-    // A MobilePhone IS an Asset (inheritance), so it gets all Asset properties.
+    // A MobilePhone IS an Asset (inheritance), so it gets all Asset code.
     public class MobilePhone : Asset
     {
+        // Fills in the abstract AssetType property from Asset
+        public override string AssetType => "Phone";
+
         public MobilePhone(
             string brand,
             string model,
             DateTime purchaseDate,
             decimal priceEur,
             Office office)
-            // The asset type is fixed to "Phone" for every MobilePhone.
-            : base("Phone", brand, model, purchaseDate, priceEur, office)
+            : base(brand, model, purchaseDate, priceEur, office)
         {
         }
     }
