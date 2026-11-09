@@ -8,8 +8,6 @@ namespace Week45_MiniProject_AssetTrackingSystem.Models
     public class Computer : Asset
     {
         // "override" fills in the abstract AssetType property from Asset.
-        // If we forgot this line, the code would not compile - the compiler
-        // forces every subclass to keep the "promise" made by the abstract class.
         public override string AssetType => "Computer";
 
         public Computer(
